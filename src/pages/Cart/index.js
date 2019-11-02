@@ -5,7 +5,7 @@ import {
     MdDelete,
 } from 'react-icons/md';
 
-import { Container, ProductTable, Total } from './styles';
+import { Container, ProductTable, Total, ButtonGroup } from './styles';
 
 export default function Cart() {
     return (
@@ -33,16 +33,21 @@ export default function Cart() {
                             <span>R$ 129,90</span>
                         </td>
                         <td>
-                            <button type="button">
-                                <MdRemoveCircleOutline
-                                    size={20}
-                                    color="#100496"
-                                />
-                            </button>
-                            <input type="number" readOnly value={2} />
-                            <button type="button">
-                                <MdAddCircleOutline size={20} color="#100496" />
-                            </button>
+                            <ButtonGroup>
+                                <button type="button">
+                                    <MdRemoveCircleOutline
+                                        size={20}
+                                        color="#100496"
+                                    />
+                                </button>
+                                <input type="number" readOnly value={2} />
+                                <button type="button">
+                                    <MdAddCircleOutline
+                                        size={20}
+                                        color="#100496"
+                                    />
+                                </button>
+                            </ButtonGroup>
                         </td>
                         <td>
                             <strong>R$ 00.00</strong>
@@ -56,6 +61,7 @@ export default function Cart() {
                 </tbody>
             </ProductTable>
             <footer>
+                <button type="button">FINALIZAR PEDIDO</button>
                 <Total>
                     <span>TOTAL</span>
                     <strong>R$ 00,00</strong>
