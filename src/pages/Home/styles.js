@@ -36,14 +36,14 @@ export const ProductList = styled.ul`
             display: flex;
             flex-direction: row;
             align-items: center;
-            background: #100496;
+            background: #301199;
             border-radius: 5px;
             color: #fff;
             border: none;
             margin-top: auto;
 
-            &:hover{
-                background: ${darken(0.03, '#100496')}
+            &:hover {
+                background: ${darken(0.03, '#301199')};
             }
 
             > div {
@@ -56,7 +56,7 @@ export const ProductList = styled.ul`
             }
 
             > span {
-                flex: 1
+                flex: 1;
                 font-weight: bold;
             }
         }
