@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import background from '../assets/images/background.svg';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default createGlobalStyle`
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
@@ -18,7 +19,7 @@ export default createGlobalStyle`
     }
 
     body{
-        background: #301199 url(${background}) no-repeat;
+        background: #100496 url(${background}) no-repeat;
         -webkit-font-smothing: antialiased !important;
     }
 
