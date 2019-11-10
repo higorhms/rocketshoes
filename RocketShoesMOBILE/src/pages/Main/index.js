@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Text, FlatList } from 'react-native';
+
 import api from '../../services/api';
+import { formatPrice } from '../../util/format';
 import {
     Container,
     ProductImage,
@@ -31,7 +33,7 @@ export default function Main({ navigation }) {
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 data={products}
-                keyExtrator={product => String(product.id)}
+                keyExtractor={product => String(product.id)}
                 renderItem={({ item }) => (
                     <ProductItem>
                         <ProductImage
@@ -40,7 +42,7 @@ export default function Main({ navigation }) {
                             }}
                         />
                         <ProductTitle>{item.title}</ProductTitle>
-                        <ProductPrice>R$ {item.price}0</ProductPrice>
+                        <ProductPrice>{formatPrice(item.price)}</ProductPrice>
                         <Button
                             onPress={() =>
                                 navigation.navigate('Cart', { Cart })
