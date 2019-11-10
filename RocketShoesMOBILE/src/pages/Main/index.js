@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Text } from 'react-native';
+import { Text, FlatList } from 'react-native';
 import api from '../../services/api';
 import {
     Container,
@@ -9,12 +9,12 @@ import {
     Button,
     ButtonText,
     ProductPrice,
-    List,
     ProductTitle,
     ProductAmount,
 } from './styles';
+import Cart from '../Cart';
 
-export default function Main() {
+export default function Main({ navigation }) {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -23,11 +23,11 @@ export default function Main() {
             setProducts(response.data);
         }
         fetchMyApi();
-    }, []);
+    }, [navigation]);
 
     return (
         <Container>
-            <List
+            <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 data={products}
@@ -40,8 +40,12 @@ export default function Main() {
                             }}
                         />
                         <ProductTitle>{item.title}</ProductTitle>
-                        <ProductPrice>{item.price}</ProductPrice>
-                        <Button>
+                        <ProductPrice>R$ {item.price}0</ProductPrice>
+                        <Button
+                            onPress={() =>
+                                navigation.navigate('Cart', { Cart })
+                            }
+                        >
                             <ProductAmount>
                                 <Icon
                                     name="add-shopping-cart"

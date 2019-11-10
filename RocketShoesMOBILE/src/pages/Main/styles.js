@@ -5,6 +5,7 @@ import colors from '../../styles/colors';
 
 export const Container = styled.View`
     background: ${colors.dark};
+    margin-top: 50px;
 `;
 
 export const ProductItem = styled.View`
@@ -44,12 +45,6 @@ export const ButtonText = styled.Text`
     text-align: center;
     font-weight: bold;
     color: #fff;
-`;
-
-export const List = styled.FlatList.attrs({
-    showsVerticalScrollIndicator: false,
-})`
-    margin-top: 20px;
 `;
 
 export const ProductAmount = styled.View`
