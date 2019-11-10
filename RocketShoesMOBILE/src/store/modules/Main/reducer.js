@@ -1,8 +1,8 @@
-const INITIAL_STATE = { products: [], amount: 0 };
+const INITIAL_STATE = { products: [] };
 
-export default function cart(state = INITIAL_STATE, action) {
+export default function Main(state = INITIAL_STATE, action) {
     switch (action.type) {
-        case '@Cart/ADD':
+        case '@Main/LOAD_PRODUCTS':
             return { ...state, products: action.products };
 
         default:

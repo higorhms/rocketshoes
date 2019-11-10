@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Text, FlatList } from 'react-native';
 
@@ -16,16 +17,23 @@ import {
 } from './styles';
 import Cart from '../Cart';
 
+import * as MainActions from '../../store/modules/Main/actions';
+
 export default function Main({ navigation }) {
-    const [products, setProducts] = useState([]);
+    const dispatch = useDispatch();
+    const products = useSelector(state => state.main.products);
 
     useEffect(() => {
         async function fetchMyApi() {
             const response = await api.get('/products');
-            setProducts(response.data);
+            const data = response.data.map(product => ({
+                ...product,
+                formattedPrice: formatPrice(product.price),
+            }));
+            dispatch(MainActions.loadProducts(data));
         }
         fetchMyApi();
-    }, [navigation]);
+    }, [dispatch, navigation]);
 
     return (
         <Container>
@@ -42,7 +50,7 @@ export default function Main({ navigation }) {
                             }}
                         />
                         <ProductTitle>{item.title}</ProductTitle>
-                        <ProductPrice>{formatPrice(item.price)}</ProductPrice>
+                        <ProductPrice>{item.formattedPrice}</ProductPrice>
                         <Button
                             onPress={() =>
                                 navigation.navigate('Cart', { Cart })
