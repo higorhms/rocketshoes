@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Text, FlatList } from 'react-native';
+import produce from 'immer';
 import {
     Container,
     ProductImage,
@@ -15,6 +16,7 @@ import {
 import Cart from '../Cart';
 
 import * as MainActions from '../../store/modules/Main/actions';
+import { addToCartRequest } from '../../store/modules/Cart/actions';
 
 export default function Main({ navigation }) {
     const dispatch = useDispatch();
@@ -44,9 +46,9 @@ export default function Main({ navigation }) {
                         <ProductTitle>{item.title}</ProductTitle>
                         <ProductPrice>{item.formattedPrice}</ProductPrice>
                         <Button
-                            onPress={() =>
-                                navigation.navigate('Cart', { Cart })
-                            }
+                            onPress={() => {
+                                dispatch(addToCartRequest(item));
+                            }}
                         >
                             <ProductAmount>
                                 <Icon

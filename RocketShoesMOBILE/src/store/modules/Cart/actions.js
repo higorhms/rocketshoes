@@ -1,4 +1,8 @@
-export function addToCart(products) {
-    console.tron.log(products);
-    return { type: '@Cart/ADD', products };
+export function addToCartRequest(product) {
+    console.tron.log(product);
+    return { type: '@Cart/ADD_REQUEST', product };
+}
+
+export function addToCartSucess(product) {
+    return { type: '@Cart/ADD_SUCESS', product };
 }
