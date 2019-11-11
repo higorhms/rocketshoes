@@ -2,9 +2,6 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Text, FlatList } from 'react-native';
-
-import api from '../../services/api';
-import { formatPrice } from '../../util/format';
 import {
     Container,
     ProductImage,
@@ -25,12 +22,7 @@ export default function Main({ navigation }) {
 
     useEffect(() => {
         async function fetchMyApi() {
-            const response = await api.get('/products');
-            const data = response.data.map(product => ({
-                ...product,
-                formattedPrice: formatPrice(product.price),
-            }));
-            dispatch(MainActions.loadProducts(data));
+            dispatch(MainActions.loadProductsRequest());
         }
         fetchMyApi();
     }, [dispatch, navigation]);
