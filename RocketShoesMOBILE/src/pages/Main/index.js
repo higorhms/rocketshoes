@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Text, FlatList } from 'react-native';
-import produce from 'immer';
 import {
     Container,
     ProductImage,
@@ -13,21 +12,28 @@ import {
     ProductTitle,
     ProductAmount,
 } from './styles';
-import Cart from '../Cart';
 
-import * as MainActions from '../../store/modules/Main/actions';
-import { addToCartRequest } from '../../store/modules/Cart/actions';
+import { addToCartRequest } from '../../store/modules/cart/actions';
+import api from '../../services/api';
+import { formatPrice } from '../../util/format';
 
 export default function Main({ navigation }) {
     const dispatch = useDispatch();
-    const products = useSelector(state => state.main.products);
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
         async function fetchMyApi() {
-            dispatch(MainActions.loadProductsRequest());
+            await api.get('/products').then(response => {
+                setProducts(
+                    response.data.map(product => ({
+                        ...product,
+                        formattedPrice: formatPrice(product.price),
+                    }))
+                );
+            });
         }
         fetchMyApi();
-    }, [dispatch, navigation]);
+    }, [navigation]);
 
     return (
         <Container>
@@ -47,7 +53,7 @@ export default function Main({ navigation }) {
                         <ProductPrice>{item.formattedPrice}</ProductPrice>
                         <Button
                             onPress={() => {
-                                dispatch(addToCartRequest(item));
+                                dispatch(addToCartRequest(item.id));
                             }}
                         >
                             <ProductAmount>

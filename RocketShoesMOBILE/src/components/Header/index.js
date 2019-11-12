@@ -15,7 +15,7 @@ import Cart from '../../pages/Cart';
 import Main from '../../pages/Main';
 
 export default function Header({ navigation }) {
-    const cartSize = useSelector(state => state.cart.products.length);
+    const cartSize = useSelector(state => state.cart.length);
 
     return (
         <Wrapper>
