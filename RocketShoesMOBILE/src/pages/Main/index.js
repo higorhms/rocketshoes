@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Text, FlatList } from 'react-native';
+import PropTypes from 'prop-types';
 import {
     Container,
     ProductImage,
@@ -54,6 +55,7 @@ export default function Main({ navigation }) {
                         <Button
                             onPress={() => {
                                 dispatch(addToCartRequest(item.id));
+                                return navigation.navigate('Cart');
                             }}
                         >
                             <ProductAmount>
@@ -72,3 +74,7 @@ export default function Main({ navigation }) {
         </Container>
     );
 }
+
+Main.propTypes = {
+    navigation: PropTypes.shape().isRequired,
+};
