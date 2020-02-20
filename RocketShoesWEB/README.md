@@ -1,6 +1,6 @@
 # Rocketshoes 
 <h1 align="center" >  
-  <img src="/readme-assets/screenshot.png" width="600"/>
+  <img src="/assets/printPendente.png" width="600"/>
 </h1>
 
 Projeto usando ReactJS e json-server.
